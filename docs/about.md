@@ -4,6 +4,8 @@ title: 关于我们
 ---
 
 热爱生活 修改了东西
+<img class="custom" :src="$withBase('/favicon.ico')" alt="favicon">
+![favicon](/favicon.ico)
 
 ## 大标题
 ### hello

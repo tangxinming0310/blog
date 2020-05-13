@@ -11,7 +11,6 @@ module.exports = {
   plugins: pluginsConfig,
   themeConfig: {
     lastUpdated: '更新时间',
-    nav: navConfig,
-    sidebar: sideBarConfig
+    nav: navConfig
   }
 }
