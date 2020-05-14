@@ -1,7 +1,6 @@
 const headerConfig = require('./config/headerConfig')
 const pluginsConfig = require('./config/pluginsConfig')
 const navConfig = require('./config/navConfig')
-const sideBarConfig = require('./config/sideBarConfig')
 
 module.exports = {
   base: '/blog/',

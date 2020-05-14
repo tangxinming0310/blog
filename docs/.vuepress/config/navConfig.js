@@ -1,24 +1,13 @@
 module.exports = [
-  { text: 'Home', link: '/' },
-  { text: 'Guide', link: '/about' },
-  { text: 'css', link: '/css/' },
-  { text: 'js', link: '/js/' },
+  { text: '网络', link: '/network/' },
+  { text: '随记', link: '/note/' },
+  { text: '刷题笔记', link: '/code/base' },
   {
-    text: 'Languages',
+    text: '框架',
     items: [
       {
-        text: 'Group1', items: [
-          { text: 'Home', link: '/' },
-          { text: 'Guide', link: '/about' }
-        ]
-      },
-      {
-        text: 'Group2', items: [
-          { text: 'Home', link: '/' },
-          { text: 'Guide', link: '/about' }
-        ]
+        text: 'Vue', link: '/frame/Vue/base'
       }
     ]
-  },
-  { text: 'External', link: 'https://google.com' },
+  }
 ]
