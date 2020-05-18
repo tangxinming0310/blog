@@ -1,5 +1,5 @@
 module.exports = [
-  { text: '网络', link: '/network/' },
+  { text: '浏览器', link: '/network/' },
   { text: '随记', link: '/note/' },
   { text: '刷题笔记', link: '/code/base' },
   {
