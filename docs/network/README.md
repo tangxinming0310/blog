@@ -1,5 +1,6 @@
 ---
 title: 浏览器相关
+sidebarDepth: 2
 ---
 ## 1.关于浏览器缓存
 缓存是性能优化中非常重要的一个环节。浏览器中缓存分为：
@@ -36,7 +37,7 @@ Cache-Control:max-age=3600
 
 当`Expires`和`Cache-Control`同时存在的时候，会优先考虑`Cache-Control`  
 当资源缓存超时了，也就是`强缓存`失效了，接下来就会进入到**协商缓存**
-### 协商缓存
+### 1.2 协商缓存
 强缓存失效后，浏览器在请求头中携带相应的`tag`来向服务器发送请求，由服务器根据这个`tag`来决定是否使用缓存，这个就是**协商缓存**  
 缓存的`tag`分为两种，一种是`Last-Modified`和`Etag`
 
@@ -60,3 +61,62 @@ Cache-Control:max-age=3600
       + `Last-Modified`能够感知的时间是秒，如果在`1s`内改变了很多次，这个时候它就不能体现出具体的修改
   2. 性能上，`Last-Modified`优于`ETag`，因为`Last-Modified`只是记录一个时间，而`ETag`需要根据文件内容生成哈希值
 如果两种方式都支持的话，服务器会优先考虑`ETag`
+
+## 2.浏览器本地存储
+浏览器本地存储主要有：
+  + `Cookie`
+  + `WebStorage`
+    + `sessionStorage`
+    + `localStorage`
+  + `IndexedDB`
+
+### Cookie
+`Cookie`是在浏览器里面存储一个很小的文本文件，内部以键值对的方式存储，向同一域名下发送请求，都会携带相同的`Cookie`，服务器拿到`Cookie`进行解析，便可以拿到客户端的状态，它就是用来做**状态存储**的，但是它有一些缺陷
+  + 容量缺陷，只能存储`4kb`大小的信息
+  + 性能缺陷，同域名下的所有请求都会自动带上完整的`Cookie`信息，即使这个请求不需要，如果请求数量很多很多的话，就会造成一定的性能浪费
+  + 安全缺陷，`Cookie`在浏览器和服务器之间的的传输形式是纯文本的，容易被非法用户截获，然后篡改，然后在`Cookie`有效期内在发送给服务器，这样是非常危险的，还有在`HttpOnly`为`false`的情况下，`Cookie`中的信息是可以通过`JS`脚本进行读取的。
+
+### localStorage
+`localStorage`和`Cookie`类似，针对同一域名，在同一域名下，存储相同的一段`localStorage`  
+
+不过它相对于`Cookie`来说，有一定的区别
+  + 容量上，`localStorage`的存储容量上限为`5M`
+  + 时间上，对于同一域名，如果不手动删除，理论上是一直存在的，也就是说是**持久存储**的
+  + 因为不需要和服务端进行通信，所以没有了`Cookie`带来的**安全问题**和**性能问题**
+  + 操作非常方便，它本身带有`setItem`和`getItem`等方法，我们只需要调用这些方法对其进行操作
+
+举个例子：
+```js
+const people = {name: '星光', age: 18}
+localStorage.setItem('people', JSON.stringify(people))
+```
+接下在同域名下获取和移除也是非常简单的
+```js
+// 获取
+const peopleStr = localStorage.getItem('people')
+const peopleFromLocal = JSON.parse(peopleStr) // {name: "星光", age: 18}
+// 移除
+localStorage.removeItem('people')
+const peopleInfo = localStorage.getItem('people') // null
+```
+可以看到，它只能存储字符串，通过`JSON.stringify()`方法把对象转出字符串，通过`JSON.parse()`解析成对象
+
+### sessionStorage
+`sessionStorage`和`localStorage`基本一样，
+  + 容量上限为`5M`
+  + 只存在于客户端，不与服务端进行通信
+  + 操作方式与`localStorage`一致
+
+但是`sessionStorage`和`localStorage`有个本质的区别，就是`sessionStorage`是会话级别的存储，不是持久性存储，当会话结束，也就是页面被关闭之后，存储在`sessionStorage`中的信息就不在了
+
+### IndexedDB
+`IndexedDB`是运行在浏览器端的`非关系型数据库`，存储容量理论上是没有上限的  
+有一些需要注意的点
+  + 采用`键值对`进行存储
+  + 受浏览器同源策略
+  + 异步操作，数据库的读写属于I/O，浏览器中对异步I/O提供了支持, 异步设计是为了防止大量数据的读写，拖慢网页的表现。
+
+总结一下：
+  + `Cookie`并不适合存储
+  + `localStorage`和`sessionStorage`不会与服务端通信
+  + `IndexedDB`是运行在浏览器端的数据库，为大型数据的存储提供了接口
