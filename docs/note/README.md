@@ -73,8 +73,7 @@ a:visited{ /* visited在hover后面，这样的话hover事件就失效了 */
     let p1 = 0, p2 = 1
     while(p2 < array.length) {
       if (array[p1] !== array[p2]) {
-        array[p1 + 1] = array[p2]
-        p1++
+        array[++p1] = array[p2]
       }
       p2++
     }
@@ -226,4 +225,94 @@ function instanceof(left, right) {
 HTTP是定义数据，在两台计算机传递信息时，它规定了每段数据应该以什么样的格式传输才能被另外一台计算机解析  
 TCP要规定的是数据要怎样传输才能稳定高效的传递于计算机之间
 
+## 事件的防抖和节流
 
+### 节流
+节流的核心思想：如果在定时器的时间范围内再次触发，则不予理睬，等当前定时器完成，才能启动下一个定时器任务
+
+code:
+```js
+function throttle(fn, delay){
+  let flag = true
+  return function (...args) {
+    let that = this
+    if (!flag) return
+    flag = false
+    setTimeout(() => {
+      fn.apply(that, ...args)
+      flag = true
+    }, delay)
+  }
+}
+```
+
+### 防抖
+思想：每次事件触发都删除原来的定时器，建立新的定时器。
+
+code:
+```js
+function debounce(fn, delay) {
+  let timer = null
+  return function(...args) {
+    let that = this
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(that, args)
+    }, delay)
+  }
+}
+```
+
+## 图片懒加载
+### 方案一：clientHeight、srollTop和offsetTop
+首先图片有一个占位资源
+```html
+<img src="default.png" data-src="http://www.xxx.com/target.png">
+```  
+监听 `scroll` 来判断图片是否到达了视口
+
+```js
+let imgs = document.getElementsByTagName('img')
+let num = imgs.length
+let count = 0 // 计数器，从第一张图片开始
+
+lazyLoad() // 首次加载图片
+
+// 监听scroll
+window.addEventListener('scroll', lazyLoad)
+
+function lazyLoad(){
+  let viewHeight = document.documentElement.clientHeight // 视口的高度
+  let scrollHeight = document.documentElement.scrollTop || document.body.srollTop // 滚动条卷去的高度
+  for (let i = count; i< num; i++) {
+    // 当元素出现在视口中
+    if (imgs[i].offsetTop < viewHeight + scrollHeight) {
+      if (imgs[i].getAttribute("src") !== 'default.png') continue
+      imgs[i].src = img[i].getAttribute('data-src')
+      count++
+    }
+  }
+}
+```
+
+`scroll`事件最好坐一下节流
+
+```js
+window.addEventListener('scroll', throttle(lazyLoad, 200))
+```
+
+### 方案二：getBoundingClientRect
+DOM元素的API，`getBoundingClientRect`方法返回元素的大小及其相对于视口的位置
+所以，我们把上面的`lazyLoad`方法修改一下
+```js
+function lazyLoad() {
+  for (let i = count; i < num; i++) {
+    // 元素已经出现在视口中
+    if (imgs[i].getBoundingClientRect().top < document.documentElement.clientHeight) {
+      if (imgs[i].getAttribute('src') !== 'default.png') continue
+      imgs[i].src = imgs[i].getAttribute('data-src')
+      count++
+    }
+  }
+}
+```

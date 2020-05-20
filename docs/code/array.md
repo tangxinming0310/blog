@@ -209,3 +209,109 @@ var containsDuplicate = function(nums) {
   return false
 }
 ```
+
+## 只出现一次的数字
+给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+
+示例 1:
+```js
+输入: [2,2,1]
+输出: 1
+```
+
+示例 2:
+```js
+输入: [4,1,2,1,2]
+输出: 4
+```
+
+code:
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+  let ret = nums[0]
+  for (let i = 1, len = nums.length; i < len; i++) {
+    ret = ret ^ nums[i]
+  }
+  return ret
+}
+```  
+
+## 两个数组的交集 II
+给定两个数组，编写一个函数来计算它们的交集。
+
+示例 1:
+```js
+输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]
+```
+示例 2:
+```js
+输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+输出: [4,9]
+```
+说明：
+
+  + 输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
+  + 我们可以不考虑输出结果的顺序。
+
+code:
+解法一：
+利用map
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+  let map = new Map()
+  for (let i = 0, len = nums1.length; i < len; i++) {
+    if (map.get(nums1[i])) {
+      let count = map.get(nums1[i])
+      map.set(nums1[i], count+1)
+    } else {
+      map.set(nums1[i], 1)
+    }
+  }
+  let ret = []
+  for (let j = 0, len = nums2.length; j < len; j++) {
+    if (map.get(nums2[j]) > 0) {
+      ret.push(nums2[j])
+      let count = map.get(nums2[j])
+      map.set(nums2[j], count-1)
+    }
+  }
+  return ret
+}
+```
+
+解法二：
+因为不要求输出顺序，可以先对数组排序，然后利用双指针
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+  const sortRule = (a, b) => a- b
+  nums1.sort(sortRule) 
+  nums2.sort(sortRule)
+  let p1 = 0, 
+      p2 = 0,
+      ret = []
+  while(p1 < nums1.length && p2 < nums2.length) {
+    if (nums1[p1] > nums2[p2]) p2++
+    else if (nums[p1] < nums2[p2]) p1++
+    else {
+      ret.push(nums[p1++])
+      p2++
+    }
+  }
+  return ret
+}
+```
