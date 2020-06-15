@@ -315,3 +315,38 @@ var intersect = function(nums1, nums2) {
   return ret
 }
 ```
+
+## 在有序二维数组中查找一个数字是否存在
+假如数组横向和纵向都有序，给定一个数字，查找是否在改数组中存在
+
+示例:
+```js
+let arr = [
+		[1, 3, 5, 6],
+		[2, 5, 7, 9],
+		[4, 6, 8, 10]
+]
+给定数字 6
+返回 true
+```
+
+思路，从右上角开始查找，因为数组有序，所以如果比要查找的数字大则向左移动，小的话向下移动
+
+code:
+
+```js
+var findNumber = function (arr, target) {
+  let x = 0,
+      y = arr[0].length
+  while(x <= arr.length - 1 && y >= 0) {
+    if (arr[x][y] > target) {
+      y--
+    } else if (arr[x][y] < target) {
+      x++
+    } else {
+      return true
+    }
+  }
+  return false
+}
+```
