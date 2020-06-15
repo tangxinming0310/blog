@@ -1,3 +1,6 @@
+---
+title: 函数式编程(FP)
+---
 ## 函数式编程(Functional Programming, FP)
 
 ### 概念
@@ -40,7 +43,7 @@ console.log(sum)
 
 有这样一种场景，有两个页面
 
-![页面](./img/page.png)
+<img class="custom" :src="$withBase('/img/page.png')" alt="queue">
 
 页面`A`和页面`B`，两个页面布局形式差不多，然后每个页面分为两个部分，上面部分横着排，每个元素显示名称`name`和描述`desc`，下面部分竖着排，然后也显示名称`name`和描述`desc`，然后多显示一个关系`ship`，
 
@@ -494,7 +497,7 @@ power3(7)
 
 在浏览器中打开开发中工具中的`Sources`，我们可以看到代码执行情况、作用域情况以及闭包情况
 
-![codeRun](./img/run.jpg)
+<img class="custom" :src="$withBase('/img/run.jpg')" alt="queue">
 
 #### 求员工的工资
 
@@ -856,12 +859,12 @@ _.toUpper(_.first(_.reverse(array)))
 
 下面这张图表示程序中使用函数处理数据的过程，给 fn 函数输入参数 a，返回结果 b。 a 数据通过一个管道得到了 b 数据。
 
-![长管道](./img/grep.png)
+<img class="custom" :src="$withBase('/img/grep.png')" alt="queue">
 
 当 fn 函数比较复杂的时候，我们可以把函数 fn 拆分成多个小函数，此时多了中间运算过程产生的 m和 n。
 下面这张图中可以想象成把 fn 这个管道拆分成了3个管道 f1, f2, f3，数据 a 通过管道 f3 得到结果 m，m 再通过管道 f2 得到结果 n，n 通过管道 f1 得到最终结果 b
 
-![小管道](./img/grep_mini.png)
+<img class="custom" :src="$withBase('/img/grep_mini.png')" alt="queue">
 
 ```js
 fn = compose(f1, f2, f3)
@@ -1137,7 +1140,7 @@ let r = Container.of(null)
 
 ```
 
-![错误信息](./img/error.png)
+<img class="custom" :src="$withBase('/img/error.png')" alt="queue">
 
 这种情况我们就可以使用`MayBe`函子来处理
 
@@ -1181,9 +1184,7 @@ console.log(r2)
 
 结果：
 
-![maybe函子](./img/maybe.png)
-
-
+<img class="custom" :src="$withBase('/img/maybe.png')" alt="queue">
 
 可以看到当值为`null`的时候并不会报错，会返回一个值为`null` 的函子
 
@@ -1287,7 +1288,7 @@ console.log(r3)
 
 结果：
 
-![Either函子](./img/Either.png)
+<img class="custom" :src="$withBase('/img/Either.png')" alt="queue">
 
 可以看到，程序不会报错，会返回一个带有错误信息的函子，正确情况下也是没问题的
 
@@ -1394,7 +1395,7 @@ readFile('../package.json')
 
 结果：
 
-![task](./img/task.png)
+<img class="custom" :src="$withBase('/img/task.png')" alt="queue">
 
 在这里我们会获取到`package.json`文件中的所有内容，那么我们如果获取其中的`version`呢？
 
