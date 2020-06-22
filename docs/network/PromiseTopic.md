@@ -1536,7 +1536,7 @@ function limitLoad(ulrs, handler, limit) {
   let sequeue = [...urls]  // 复制urls
    // 这一步是为了初始化 promises 这个"容器"
   let promises = sequeue.splice(0, 3).map((url, index) => {
-    return handle(url).then(() => {
+    return handler(url).then(() => {
        // 返回下标是为了知道数组中是哪一项最先完成
       return index
     })
