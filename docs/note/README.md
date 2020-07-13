@@ -148,7 +148,7 @@ new一个函数，都会发生什么？
   2. 将构造函数的作用域赋给新对象
   3. 执行构造函数中的代码
   4. 返回新对象
-  
+
 ## typeof和instanceof的区别
 `typeof`表示对某个对象类型的检测，基本数据类型除了`null`，都可以显示为正确的类型，引用类型除了函数是`function`，其他都是`object`  
 `instanceof`是检测**某个构造函数的原型对象在不在某个对象的原型链上**
@@ -268,7 +268,7 @@ function debounce(fn, delay) {
 首先图片有一个占位资源
 ```html
 <img src="default.png" data-src="http://www.xxx.com/target.png">
-```  
+```
 监听 `scroll` 来判断图片是否到达了视口
 
 ```js
@@ -316,3 +316,23 @@ function lazyLoad() {
   }
 }
 ```
+
+## 关于this的总结
+
+1. 沿着作用域向上找最近的一个function， 看这个function最终是怎样执行的；
+
+2.  this的指向取决于所属function的调用方式， 而不是定义；
+
+3. function调用一般分为以下几种情况：
+   a. 作为函数调用， 即：foo()
+
+   1. 指向全局对象，注意严格模式问题
+
+   2. 指向最终调用这个方法的对象
+
+   3. 指向一个新对象Foo()
+      i.参数指定成员
+
+      b.作为方法调用， 即：foo.bar() /foo.bar.baz()
+      c.作为构造函数调用， 即：new Foo()
+      d.特殊调用， 即：foo.call() /foo.apply()
