@@ -4,7 +4,7 @@ const navConfig = require('./config/navConfig')
 
 module.exports = {
   base: '/blog/',
-  title: '明天',
+  title: '橘子',
   description: '明日可期',
   head: headerConfig,
   plugins: pluginsConfig,
