@@ -1,5 +1,5 @@
 ---
-title: 手写一个自己的 VueRouter （history）
+title: 手写一个自己的 VueRouter
 sidebarDepth: 2
 ---
 
@@ -420,7 +420,7 @@ initComponents(Vue) {
 
 
 
-### 完整版代码
+### 完整版代码（history）
 
 ```js
 let _Vue = null
@@ -529,6 +529,93 @@ export default class VueRouter {
     window.addEventListener('popstate', () => {
       // 将当前路径记录在 data.current 中
       this.data.current = window.location.pathname
+    })
+  }
+}
+
+```
+
+### 完整版代码（hash）
+
+因为`hash`模式和 `history`实现起来非常类似，这里就只给出代码，相差不大，利用 `hashchange`就可以了
+
+```js
+let _Vue = null
+
+export default class VueRouter {
+  static install (Vue) {
+    if (VueRouter.install.installed && _Vue === Vue) {
+      return
+    }
+    VueRouter.install.installed = true
+    _Vue = Vue
+    Vue.mixin({
+      beforeCreate () {
+        if (this.$options.router) {
+          _Vue.prototype.$router = this.$options.router
+          this.$router.init()
+        }
+      }
+    })
+  }
+
+  constructor (options) {
+    this.options = options
+    this.routeMap = {}
+    this.data = _Vue.observable({
+      current: '/'
+    })
+  }
+
+  init () {
+    this.createRouteMap()
+    this.initComponents(_Vue)
+    this.initEvent()
+  }
+
+  createRouteMap () {
+    this.options.routes.forEach(route => {
+      this.routeMap[route.path] = route.component
+    })
+    console.log(this.routeMap)
+  }
+
+  initComponents (Vue) {
+    this.data.current = window.location.hash.slice(1)
+    Vue.component('router-link', {
+      props: {
+        to: String
+      },
+      render (h) {
+        return h('a', {
+          attrs: {
+            href: this.to
+          },
+          on: {
+            click: this.clickHandler
+          }
+        }, [this.$slots.default])
+      },
+      methods: {
+        clickHandler (e) {
+          window.location.hash = this.to
+          this.$router.data.current = this.to
+          e.preventDefault()
+        }
+      }
+    })
+    const self = this
+    Vue.component('router-view', {
+      render (h) {
+        const component = self.routeMap[self.data.current]
+        return h(component)
+      }
+    })
+  }
+
+  initEvent () {
+    window.addEventListener('hashchange', () => {
+      this.data.current = window.location.hash.slice(1)
     })
   }
 }
