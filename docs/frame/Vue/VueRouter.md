@@ -535,11 +535,12 @@ export default class VueRouter {
 
 ```
 
-### 完整版代码（hash）
+### 有hash模式和history模式的完整版代码
 
 因为`hash`模式和 `history`实现起来非常类似，这里就只给出代码，相差不大，利用 `hashchange`就可以了
 
 ```js
+const HASH = 'hash'
 let _Vue = null
 
 export default class VueRouter {
@@ -552,8 +553,8 @@ export default class VueRouter {
     Vue.mixin({
       beforeCreate () {
         if (this.$options.router) {
-          _Vue.prototype.$router = this.$options.router
-          this.$router.init()
+          Vue.prototype.$router = this.$options.router
+          this.$options.router.init()
         }
       }
     })
@@ -562,6 +563,7 @@ export default class VueRouter {
   constructor (options) {
     this.options = options
     this.routeMap = {}
+    this.mode = options.mode
     this.data = _Vue.observable({
       current: '/'
     })
@@ -573,15 +575,9 @@ export default class VueRouter {
     this.initEvent()
   }
 
-  createRouteMap () {
-    this.options.routes.forEach(route => {
-      this.routeMap[route.path] = route.component
-    })
-    console.log(this.routeMap)
-  }
-
   initComponents (Vue) {
-    this.data.current = window.location.hash.slice(1)
+    this.refresh()
+    const self = this
     Vue.component('router-link', {
       props: {
         to: String
@@ -598,13 +594,14 @@ export default class VueRouter {
       },
       methods: {
         clickHandler (e) {
-          window.location.hash = this.to
+          self.mode === HASH
+            ? self.hashChange(this.to)
+            : self.historyChange(this.to)
           this.$router.data.current = this.to
           e.preventDefault()
         }
       }
     })
-    const self = this
     Vue.component('router-view', {
       render (h) {
         const component = self.routeMap[self.data.current]
@@ -613,7 +610,48 @@ export default class VueRouter {
     })
   }
 
+  createRouteMap () {
+    this.options.routes.forEach(route => {
+      this.routeMap[route.path] = route.component
+    })
+  }
+
+  historyChange (path) {
+    history.pushState({}, '', path)
+  }
+
+  hashChange (path) {
+    window.location.hash = path
+  }
+
+  // 处理浏览器刷新问题
+  refresh () {
+    this.mode === HASH
+      ? this.hashURLHandle()
+      : this.data.current = window.location.pathname || '/'
+  }
+
+  hashURLHandle () {
+    if (!window.location.hash) {
+      window.location.hash = '/'
+    }
+    this.data.current = window.location.hash.slice(1) || '/'
+  }
+
+  // 事件初始化
   initEvent () {
+    this.mode === HASH
+      ? this.initHashEvent()
+      : this.initHistoryEvent()
+  }
+
+  initHistoryEvent () {
+    window.addEventListener('popstate', () => {
+      this.data.current = window.location.pathname
+    })
+  }
+
+  initHashEvent () {
     window.addEventListener('hashchange', () => {
       this.data.current = window.location.hash.slice(1)
     })
