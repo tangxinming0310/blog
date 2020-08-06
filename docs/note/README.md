@@ -295,7 +295,7 @@ function lazyLoad(){
 }
 ```
 
-`scroll`事件最好坐一下节流
+`scroll`事件最好做一下节流
 
 ```js
 window.addEventListener('scroll', throttle(lazyLoad, 200))
@@ -324,15 +324,11 @@ function lazyLoad() {
 2.  this的指向取决于所属function的调用方式， 而不是定义；
 
 3. function调用一般分为以下几种情况：
-   a. 作为函数调用， 即：foo()
-
-   1. 指向全局对象，注意严格模式问题
-
-   2. 指向最终调用这个方法的对象
-
-   3. 指向一个新对象Foo()
-      i.参数指定成员
-
-      b.作为方法调用， 即：foo.bar() /foo.bar.baz()
-      c.作为构造函数调用， 即：new Foo()
-      d.特殊调用， 即：foo.call() /foo.apply()
+   1. 作为函数调用， 即：foo()
+      1. 指向全局对象，注意严格模式问题
+      2. 指向最终调用这个方法的对象
+      3. 指向一个新对象Foo()
+         1. 参数指定成员
+   2. 作为方法调用， 即：foo.bar() /foo.bar.baz()
+   3. 作为构造函数调用， 即：new Foo()
+   4. 特殊调用， 即：foo.call() /foo.apply()

@@ -638,13 +638,13 @@ yarn add babel-loader @babel/core @babel/preset-env --dev
 
 ```js
 {
-    test: /\.js$/,
-        use: {
-            loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
-                }
-        }
+  test: /\.js$/,
+  use: {
+    loader: 'babel-loader',
+    options: {
+        presets: ['@babel/preset-env']
+    }
+  }
 }
 ```
 

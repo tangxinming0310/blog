@@ -945,8 +945,6 @@ finally(callback) {
 ## 完整版代码
 
 ```js
-const { add } = require("lodash")
-
 const PENDING = 'pending' // 等待
 const FULFILLED = 'fulfilled' // 成功
 const REJECTED = 'rejected' // 失败
