@@ -10,12 +10,12 @@
     <link rel="mask-icon" href="/blog/icons/safari-pinned-tab.svg" color="#3eaf7c">
     <meta name="description" content="明日可期">
     <meta name="author" content="bright">
-    <meta name="keywords" content="前端 随记 笔记">
+    <meta name="keywords" content="前端 随记 笔记 webpack gulp grunt 自动化构建 脚手架 Yeoman plop ES6 promise vue 浏览器缓存 函数式编程 虚拟DOM">
     <meta name="theme-color" content="#3eaf7c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="msapplication-TileColor" content="#000000">
-    <link rel="preload" href="/blog/assets/css/0.styles.8a31d08e.css" as="style"><link rel="preload" href="/blog/assets/js/app.7268b5d5.js" as="script"><link rel="preload" href="/blog/assets/js/2.bfb3ed95.js" as="script"><link rel="preload" href="/blog/assets/js/24.145710ef.js" as="script"><link rel="preload" href="/blog/assets/js/3.38b041cb.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.e22ab2a4.js"><link rel="prefetch" href="/blog/assets/js/11.9b6afde3.js"><link rel="prefetch" href="/blog/assets/js/12.1881e8b2.js"><link rel="prefetch" href="/blog/assets/js/13.591e9158.js"><link rel="prefetch" href="/blog/assets/js/14.03b9db9c.js"><link rel="prefetch" href="/blog/assets/js/15.8acf6f69.js"><link rel="prefetch" href="/blog/assets/js/16.887430fe.js"><link rel="prefetch" href="/blog/assets/js/17.018b2b77.js"><link rel="prefetch" href="/blog/assets/js/18.dcc85b92.js"><link rel="prefetch" href="/blog/assets/js/19.c9b2a5b0.js"><link rel="prefetch" href="/blog/assets/js/20.cd933d25.js"><link rel="prefetch" href="/blog/assets/js/21.5887b2f8.js"><link rel="prefetch" href="/blog/assets/js/22.5cb0bf92.js"><link rel="prefetch" href="/blog/assets/js/23.bff58062.js"><link rel="prefetch" href="/blog/assets/js/25.6e7a99f7.js"><link rel="prefetch" href="/blog/assets/js/26.6251e442.js"><link rel="prefetch" href="/blog/assets/js/27.2fd5153a.js"><link rel="prefetch" href="/blog/assets/js/28.68c69371.js"><link rel="prefetch" href="/blog/assets/js/4.a5e4891f.js"><link rel="prefetch" href="/blog/assets/js/5.7165873c.js"><link rel="prefetch" href="/blog/assets/js/6.f680b873.js"><link rel="prefetch" href="/blog/assets/js/7.17ca32f2.js"><link rel="prefetch" href="/blog/assets/js/8.7acd39b4.js"><link rel="prefetch" href="/blog/assets/js/9.f5c94ac4.js">
+    <link rel="preload" href="/blog/assets/css/0.styles.8a31d08e.css" as="style"><link rel="preload" href="/blog/assets/js/app.806523c4.js" as="script"><link rel="preload" href="/blog/assets/js/2.bfb3ed95.js" as="script"><link rel="preload" href="/blog/assets/js/24.d64e1905.js" as="script"><link rel="preload" href="/blog/assets/js/3.38b041cb.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.e22ab2a4.js"><link rel="prefetch" href="/blog/assets/js/11.9b6afde3.js"><link rel="prefetch" href="/blog/assets/js/12.1881e8b2.js"><link rel="prefetch" href="/blog/assets/js/13.591e9158.js"><link rel="prefetch" href="/blog/assets/js/14.03b9db9c.js"><link rel="prefetch" href="/blog/assets/js/15.8acf6f69.js"><link rel="prefetch" href="/blog/assets/js/16.887430fe.js"><link rel="prefetch" href="/blog/assets/js/17.018b2b77.js"><link rel="prefetch" href="/blog/assets/js/18.dcc85b92.js"><link rel="prefetch" href="/blog/assets/js/19.c9b2a5b0.js"><link rel="prefetch" href="/blog/assets/js/20.3349f2c8.js"><link rel="prefetch" href="/blog/assets/js/21.2430deee.js"><link rel="prefetch" href="/blog/assets/js/22.5cb0bf92.js"><link rel="prefetch" href="/blog/assets/js/23.bff58062.js"><link rel="prefetch" href="/blog/assets/js/25.6e7a99f7.js"><link rel="prefetch" href="/blog/assets/js/26.6251e442.js"><link rel="prefetch" href="/blog/assets/js/27.795d7e54.js"><link rel="prefetch" href="/blog/assets/js/28.68c69371.js"><link rel="prefetch" href="/blog/assets/js/4.a5e4891f.js"><link rel="prefetch" href="/blog/assets/js/5.7165873c.js"><link rel="prefetch" href="/blog/assets/js/6.f680b873.js"><link rel="prefetch" href="/blog/assets/js/7.17ca32f2.js"><link rel="prefetch" href="/blog/assets/js/8.7acd39b4.js"><link rel="prefetch" href="/blog/assets/js/9.f5c94ac4.js">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.8a31d08e.css">
   </head>
   <body>
@@ -291,13 +291,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 </code></pre></div><p>这样的话 url-loader 只会处理 10KB 以下的文件，对于超过 10KB 的文件还是会交给 file-loader 去处理</p> <p>然后重新打包，dist 目录下就会多出来一张图片，原因是我们准备的图片大小超过了 10KB</p> <p><strong>需要注意的是这种方式仍然需要安装 file-loader ,因为 url-loader 对于超过限制的文件仍然会去调用 file-laoder ，如果没有 file-loader，就会发生错误</strong></p> <h2 id="webpack-常用加载器分类"><a href="#webpack-常用加载器分类" class="header-anchor">#</a> Webpack 常用加载器分类</h2> <ul><li><p>编译转换类</p> <blockquote><p>这种类型的 loader 会将文件转换为 js 代码</p></blockquote></li> <li><p>文件操作类</p> <blockquote><p>将文件拷贝到输出目录，将输出目录中的文件导出</p></blockquote></li> <li><p>代码检查类</p> <blockquote><p>针对于代码检查，不会修改生产环境的代码，提高代码质量</p></blockquote></li></ul> <h2 id="webpack-处理-es2015"><a href="#webpack-处理-es2015" class="header-anchor">#</a> Webpack 处理 ES2015</h2> <p>如果需要处理ES6 的代码，需要通过 babel-loader</p> <p>安装</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">yarn</span> <span class="token function">add</span> babel-loader @babel/core @babel/preset-env --dev
 </code></pre></div><p>然后在规则中新增一条规则</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
-    test<span class="token operator">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
-                options<span class="token operator">:</span> <span class="token punctuation">{</span>
-                    presets<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'@babel/preset-env'</span><span class="token punctuation">]</span>
-                <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
+  test<span class="token operator">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+  use<span class="token operator">:</span> <span class="token punctuation">{</span>
+    loader<span class="token operator">:</span> <span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+    options<span class="token operator">:</span> <span class="token punctuation">{</span>
+        presets<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'@babel/preset-env'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre></div><p>然后执行打包命令，在打包完成的bundle.js 文件中就可以看到我们的 ES6 代码都被转换了</p> <h2 id="webpack-加载资源的方式"><a href="#webpack-加载资源的方式" class="header-anchor">#</a> Webpack 加载资源的方式</h2> <p>Webpack 兼容多种模块化标准</p> <ul><li><p>遵循 ES Module 标准的 import 声明</p></li> <li><p>遵循 CommonJS 标准的 require 函数</p></li></ul> <blockquote><p>如果想通过 require 函数载入 ES Module 的默认导出，需要通过 require('./heading.js').default 这种形式来载入</p></blockquote> <ul><li><p>遵循 AMD 标准的 define 函数和 require 函数</p></li> <li><p>Loader加载的非 JavaScript 也会触发资源加载</p></li> <li><p>样式代码中的 @import 指令和 url 函数</p></li> <li><p>HTML 代码中图片标签的 src 属性</p></li></ul> <p>推荐不要在项目中混合使用这些标准，混合使用会大大降低项目的可维护性</p> <h3 id="样式代码中的-import-指令和-url-函数"><a href="#样式代码中的-import-指令和-url-函数" class="header-anchor">#</a> 样式代码中的 @import 指令和 url 函数</h3> <p>现在样式文件中导入资源模块</p> <p>在 main.js 中载入 css 文件</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token string">'./main.css'</span>
 </code></pre></div><p>然后在 css 文件中设置一个背景图片</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">body</span> <span class="token punctuation">{</span>
@@ -955,7 +955,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </code></pre></div><p>这个 Hash 是项目级别的，只要项目中有任何一个地方发生改动，这一次打包过程中的 Hash值都会发生变化</p> <p>chunkhash 目录级别   同一目录下的 hash 都是相同的</p> <div class="language- extra-class"><pre class="language-text"><code>filename: '[name]-[chunkhash].bundle.js'
 </code></pre></div><p>同一目录下的文件发生变化后，该目录下的Hash才会发生变化</p> <p>注意：<strong>模块热替换 和 [chunkhash] 是冲突的</strong>，<strong>要确保<em>HotModuleReplacementPlugin</em>(）函数没在生产环境下执行</strong></p> <p>contenthash 文件级别 只要是不同的文件就有不同的 Hash 值</p> <div class="language- extra-class"><pre class="language-text"><code>filename: '[name]-[contenthash].bundle.js'
 </code></pre></div><p>指定 hash 长度，可以通过下面的方式来指定 hash 的长度</p> <div class="language- extra-class"><pre class="language-text"><code>filename: '[name]-[chunkhash:8].bundle.js'
-</code></pre></div><p>如果是为了控制缓存，推荐选择8位长度</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新时间:</span> <span class="time">2020年7月18日星期六下午2点11分</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><p>如果是为了控制缓存，推荐选择8位长度</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新时间:</span> <span class="time">2020年8月6日星期四下午4点07分</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/blog/note/TS.html" class="prev">
         TypeScript
@@ -964,6 +964,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       </a>
       →
     </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/blog/assets/js/app.7268b5d5.js" defer></script><script src="/blog/assets/js/2.bfb3ed95.js" defer></script><script src="/blog/assets/js/24.145710ef.js" defer></script><script src="/blog/assets/js/3.38b041cb.js" defer></script>
+    <script src="/blog/assets/js/app.806523c4.js" defer></script><script src="/blog/assets/js/2.bfb3ed95.js" defer></script><script src="/blog/assets/js/24.d64e1905.js" defer></script><script src="/blog/assets/js/3.38b041cb.js" defer></script>
   </body>
 </html>

@@ -10,12 +10,12 @@
     <link rel="mask-icon" href="/blog/icons/safari-pinned-tab.svg" color="#3eaf7c">
     <meta name="description" content="明日可期">
     <meta name="author" content="bright">
-    <meta name="keywords" content="前端 随记 笔记">
+    <meta name="keywords" content="前端 随记 笔记 webpack gulp grunt 自动化构建 脚手架 Yeoman plop ES6 promise vue 浏览器缓存 函数式编程 虚拟DOM">
     <meta name="theme-color" content="#3eaf7c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="msapplication-TileColor" content="#000000">
-    <link rel="preload" href="/blog/assets/css/0.styles.8a31d08e.css" as="style"><link rel="preload" href="/blog/assets/js/app.7268b5d5.js" as="script"><link rel="preload" href="/blog/assets/js/2.bfb3ed95.js" as="script"><link rel="preload" href="/blog/assets/js/21.5887b2f8.js" as="script"><link rel="preload" href="/blog/assets/js/3.38b041cb.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.e22ab2a4.js"><link rel="prefetch" href="/blog/assets/js/11.9b6afde3.js"><link rel="prefetch" href="/blog/assets/js/12.1881e8b2.js"><link rel="prefetch" href="/blog/assets/js/13.591e9158.js"><link rel="prefetch" href="/blog/assets/js/14.03b9db9c.js"><link rel="prefetch" href="/blog/assets/js/15.8acf6f69.js"><link rel="prefetch" href="/blog/assets/js/16.887430fe.js"><link rel="prefetch" href="/blog/assets/js/17.018b2b77.js"><link rel="prefetch" href="/blog/assets/js/18.dcc85b92.js"><link rel="prefetch" href="/blog/assets/js/19.c9b2a5b0.js"><link rel="prefetch" href="/blog/assets/js/20.cd933d25.js"><link rel="prefetch" href="/blog/assets/js/22.5cb0bf92.js"><link rel="prefetch" href="/blog/assets/js/23.bff58062.js"><link rel="prefetch" href="/blog/assets/js/24.145710ef.js"><link rel="prefetch" href="/blog/assets/js/25.6e7a99f7.js"><link rel="prefetch" href="/blog/assets/js/26.6251e442.js"><link rel="prefetch" href="/blog/assets/js/27.2fd5153a.js"><link rel="prefetch" href="/blog/assets/js/28.68c69371.js"><link rel="prefetch" href="/blog/assets/js/4.a5e4891f.js"><link rel="prefetch" href="/blog/assets/js/5.7165873c.js"><link rel="prefetch" href="/blog/assets/js/6.f680b873.js"><link rel="prefetch" href="/blog/assets/js/7.17ca32f2.js"><link rel="prefetch" href="/blog/assets/js/8.7acd39b4.js"><link rel="prefetch" href="/blog/assets/js/9.f5c94ac4.js">
+    <link rel="preload" href="/blog/assets/css/0.styles.8a31d08e.css" as="style"><link rel="preload" href="/blog/assets/js/app.806523c4.js" as="script"><link rel="preload" href="/blog/assets/js/2.bfb3ed95.js" as="script"><link rel="preload" href="/blog/assets/js/21.2430deee.js" as="script"><link rel="preload" href="/blog/assets/js/3.38b041cb.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.e22ab2a4.js"><link rel="prefetch" href="/blog/assets/js/11.9b6afde3.js"><link rel="prefetch" href="/blog/assets/js/12.1881e8b2.js"><link rel="prefetch" href="/blog/assets/js/13.591e9158.js"><link rel="prefetch" href="/blog/assets/js/14.03b9db9c.js"><link rel="prefetch" href="/blog/assets/js/15.8acf6f69.js"><link rel="prefetch" href="/blog/assets/js/16.887430fe.js"><link rel="prefetch" href="/blog/assets/js/17.018b2b77.js"><link rel="prefetch" href="/blog/assets/js/18.dcc85b92.js"><link rel="prefetch" href="/blog/assets/js/19.c9b2a5b0.js"><link rel="prefetch" href="/blog/assets/js/20.3349f2c8.js"><link rel="prefetch" href="/blog/assets/js/22.5cb0bf92.js"><link rel="prefetch" href="/blog/assets/js/23.bff58062.js"><link rel="prefetch" href="/blog/assets/js/24.d64e1905.js"><link rel="prefetch" href="/blog/assets/js/25.6e7a99f7.js"><link rel="prefetch" href="/blog/assets/js/26.6251e442.js"><link rel="prefetch" href="/blog/assets/js/27.795d7e54.js"><link rel="prefetch" href="/blog/assets/js/28.68c69371.js"><link rel="prefetch" href="/blog/assets/js/4.a5e4891f.js"><link rel="prefetch" href="/blog/assets/js/5.7165873c.js"><link rel="prefetch" href="/blog/assets/js/6.f680b873.js"><link rel="prefetch" href="/blog/assets/js/7.17ca32f2.js"><link rel="prefetch" href="/blog/assets/js/8.7acd39b4.js"><link rel="prefetch" href="/blog/assets/js/9.f5c94ac4.js">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.8a31d08e.css">
   </head>
   <body>
@@ -159,7 +159,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><p><code>scroll</code>事件最好坐一下节流</p> <div class="language-js extra-class"><pre class="language-js"><code>window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'scroll'</span><span class="token punctuation">,</span> <span class="token function">throttle</span><span class="token punctuation">(</span>lazyLoad<span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div><p><code>scroll</code>事件最好做一下节流</p> <div class="language-js extra-class"><pre class="language-js"><code>window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'scroll'</span><span class="token punctuation">,</span> <span class="token function">throttle</span><span class="token punctuation">(</span>lazyLoad<span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre></div><h3 id="方案二：getboundingclientrect"><a href="#方案二：getboundingclientrect" class="header-anchor">#</a> 方案二：getBoundingClientRect</h3> <p>DOM元素的API，<code>getBoundingClientRect</code>方法返回元素的大小及其相对于视口的位置
 所以，我们把上面的<code>lazyLoad</code>方法修改一下</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">lazyLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> count<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -171,11 +171,9 @@ window<span class="token punctuation">.</span><span class="token function">addEv
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><h2 id="关于this的总结"><a href="#关于this的总结" class="header-anchor">#</a> 关于this的总结</h2> <ol><li><p>沿着作用域向上找最近的一个function， 看这个function最终是怎样执行的；</p></li> <li><p>this的指向取决于所属function的调用方式， 而不是定义；</p></li> <li><p>function调用一般分为以下几种情况：
-a. 作为函数调用， 即：foo()</p> <ol><li><p>指向全局对象，注意严格模式问题</p></li> <li><p>指向最终调用这个方法的对象</p></li> <li><p>指向一个新对象Foo()
-i.参数指定成员</p> <p>b.作为方法调用， 即：foo.bar() /foo.bar.baz()
-c.作为构造函数调用， 即：new Foo()
-d.特殊调用， 即：foo.call() /foo.apply()</p></li></ol></li></ol></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新时间:</span> <span class="time">2020年7月13日星期一凌晨2点00分</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><h2 id="关于this的总结"><a href="#关于this的总结" class="header-anchor">#</a> 关于this的总结</h2> <ol><li><p>沿着作用域向上找最近的一个function， 看这个function最终是怎样执行的；</p></li> <li><p>this的指向取决于所属function的调用方式， 而不是定义；</p></li> <li><p>function调用一般分为以下几种情况：</p> <ol><li>作为函数调用， 即：foo()
+<ol><li>指向全局对象，注意严格模式问题</li> <li>指向最终调用这个方法的对象</li> <li>指向一个新对象Foo()
+<ol><li>参数指定成员</li></ol></li></ol></li> <li>作为方法调用， 即：foo.bar() /foo.bar.baz()</li> <li>作为构造函数调用， 即：new Foo()</li> <li>特殊调用， 即：foo.call() /foo.apply()</li></ol></li></ol></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">更新时间:</span> <span class="time">2020年8月6日星期四下午4点07分</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/blog/note/Promise.html" class="prev">
         Promise源码实现诱导版
@@ -184,6 +182,6 @@ d.特殊调用， 即：foo.call() /foo.apply()</p></li></ol></li></ol></div> <f
       </a>
       →
     </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/blog/assets/js/app.7268b5d5.js" defer></script><script src="/blog/assets/js/2.bfb3ed95.js" defer></script><script src="/blog/assets/js/21.5887b2f8.js" defer></script><script src="/blog/assets/js/3.38b041cb.js" defer></script>
+    <script src="/blog/assets/js/app.806523c4.js" defer></script><script src="/blog/assets/js/2.bfb3ed95.js" defer></script><script src="/blog/assets/js/21.2430deee.js" defer></script><script src="/blog/assets/js/3.38b041cb.js" defer></script>
   </body>
 </html>
